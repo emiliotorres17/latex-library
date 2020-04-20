@@ -263,3 +263,24 @@
         \textcolor{#1}{\rule{0.25cm}{0.5mm}}
         }
     }
+%-------------------------------------------------------------------------%
+% Color box                                                               %
+%-------------------------------------------------------------------------%
+\newcommand*{\colorboxed}{}
+\def\colorboxed#1#{%
+    \colorboxedAux{#1}%
+}
+\newcommand*{\colorboxedAux}[3]{%
+ % #1: optional argument for color model
+ % #2: color specification
+ % #3: formula
+ \begingroup
+   \colorlet{cb@saved}{.}%
+   \color#1{#2}%
+   \boxed{%
+     \color{cb@saved}%
+     #3%
+   }%
+ \endgroup
+}
+
