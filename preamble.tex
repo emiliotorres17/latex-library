@@ -9,12 +9,14 @@
 \usepackage{breakcites}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage[margin = 0.9in]{geometry}
+%\usepackage{subfigure}
+\usepackage[margin = 0.95in]{geometry}
 \usepackage[euler]{textgreek}           %used for the text greek symbols in the names
 \usepackage{physics}                    %used for the equations
 \usepackage{array}                      %used for setting up the tables
 %\usepackage{float}                      %places the figures and tables
 \usepackage{amssymb}
+\usepackage[makeroom]{cancel}
 \usepackage{lastpage}                   %labels the last page
 \usepackage{graphicx}                   %making the figures
 \usepackage{color}                      %full color palette
@@ -32,6 +34,7 @@
 \usepackage{refcount}                   %used to reference numbers
 \usepackage{listings}                   %provide source code listing
 \usepackage{tikz}                       %for a black box on title page
+\usetikzlibrary{calc}
 \usepackage{pdfpages}                   %for pdf pages to be added
 \usepackage[printwatermark]{xwatermark} %used for water mark
 \usepackage{xcolor}                     %water mark color
@@ -44,6 +47,10 @@
 \usepackage{xr-hyper}                   %allow references between documents
 \usepackage{hyperref}                   %highlights references
 \usepackage[all]{hypcap}                %for going to the top of an image when a figure ref is clicked
+\usepackage{titlesec}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
 %=========================================================================%
 %hyperlink setup                                                          %
 %=========================================================================%
@@ -147,6 +154,7 @@
 \setcounter{secnumdepth}{3}
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{10pt}
+\newcommand{\sectionbreak}{\clearpage}
 %=========================================================================%
 % User Defined Functions                                                  %
 %=========================================================================%
@@ -266,22 +274,48 @@
 %-------------------------------------------------------------------------%
 % Color box                                                               %
 %-------------------------------------------------------------------------%
-\newcommand*{\colorboxed}{}
-\def\colorboxed#1#{%
-    \colorboxedAux{#1}%
-}
-\newcommand*{\colorboxedAux}[3]{%
- % #1: optional argument for color model
- % #2: color specification
- % #3: formula
- \begingroup
-   \colorlet{cb@saved}{.}%
-   \color#1{#2}%
-   \boxed{%
-     \color{cb@saved}%
-     #3%
-   }%
- \endgroup
+%\newcommand*{\colorboxed}{}
+%\def\colorboxed#1#{%
+%    \colorboxedAux{#1}%
+%}
+%\newcommand*{\colorboxedAux}[3]{%
+% % #1: optional argument for color model
+% % #2: color specification
+% % #3: formula
+% \begingroup
+%   \colorlet{cb@saved}{.}%
+%   \color#1{#2}%
+%   \boxed{%
+%     \color{cb@saved}%
+%     #3%
+%   }%
+% \endgroup
+%}
+%\newcommand{\colorboxed}[2]{
+%    \begin{mdframed}[
+%            linecolor=red,linewidth=2pt,% 
+%            frametitlerule=true,% 
+%            apptotikzsetting={\tikzset{mdfframetitlebackground/.append style={%
+%            shade,left color=white, right color=blue!20}}}, 
+%            frametitlerulecolor=blue,
+%            frametitlerulewidth=1pt, innertopmargin=\topskip,
+%            frametitle={Non Mutually Exclusive Events},
+%            outerlinewidth=1.25pt
+%        ]
+%        #1
+%    \end{mdframed}
+%}
+
+%\newcommand{\colorboxed}[2]{
+%    \begin{mdframed}[linecolor=#1,linewidth=2pt]
+%        #2
+%    \end{mdframed}
+%}
+
+\newcommand{\colorboxed}[1]{
+    \begin{empheq}[box=\widefbox]{equation}
+        #1
+    \end{empheq}
 }
 %-------------------------------------------------------------------------%
 % Expanding matrices                                                      %
