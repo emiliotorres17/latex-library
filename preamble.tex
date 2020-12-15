@@ -9,11 +9,11 @@
 \usepackage{breakcites}
 \usepackage{caption}
 \usepackage{subcaption}
-%\usepackage{subfigure}
-\usepackage[margin = 0.95in]{geometry}
+\usepackage[margin = 0.9in]{geometry}
 \usepackage[euler]{textgreek}           %used for the text greek symbols in the names
 \usepackage{physics}                    %used for the equations
 \usepackage{array}                      %used for setting up the tables
+\usepackage{enumitem}
 %\usepackage{float}                      %places the figures and tables
 \usepackage{amssymb}
 \usepackage[makeroom]{cancel}
@@ -50,11 +50,15 @@
 \usepackage{titlesec}
 \usepackage[framemethod=tikz]{mdframed}
 \usepackage{empheq}
-\usepackage[most]{tcolorbox}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
 %=========================================================================%
 %hyperlink setup                                                          %
 %=========================================================================%
 \definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{backgray}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
@@ -317,6 +321,11 @@
         #1
     \end{empheq}
 }
+\newcommand*\widefbox[1]%
+    {
+    \setlength{\fboxrule}{2pt}% if you like to change box lines thicnes
+    \fcolorbox{red}{white}{#1}%
+}
 %-------------------------------------------------------------------------%
 % Expanding matrices                                                      %
 %-------------------------------------------------------------------------%
@@ -326,4 +335,25 @@
   \hskip -\arraycolsep
   \let\@ifnextchar\new@ifnextchar
   \array{*\c@MaxMatrixCols c}}
+\makeatother
+%-------------------------------------------------------------------------%
+% Text block                                                              %
+%-------------------------------------------------------------------------%
+\mdfdefinestyle{MyFrame}{%
+    linecolor=red,
+    outerlinewidth=2pt,
+    roundcorner=0pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=25pt,
+    backgroundcolor=white}
+%-------------------------------------------------------------------------%
+% Augmented matrices                                                      %
+%-------------------------------------------------------------------------%
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+   \hskip -\arraycolsep
+   \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
 \makeatother
